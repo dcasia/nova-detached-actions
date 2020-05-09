@@ -1,6 +1,6 @@
 <?php
 
-namespace Brightspot\Nova\Tools\DetachedActions;
+namespace DigitalCreative\DetachedActions;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;

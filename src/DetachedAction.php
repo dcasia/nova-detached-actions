@@ -1,15 +1,16 @@
 <?php
 
-namespace Brightspot\Nova\Tools\DetachedActions;
+namespace DigitalCreative\DetachedActions;
 
+use Illuminate\Http\Resources\PotentiallyMissing;
 use Laravel\Nova\Actions\Action;
-use Laravel\Nova\Actions\DispatchAction;
 use Laravel\Nova\Actions\ActionMethod;
+use Laravel\Nova\Actions\DispatchAction;
 use Laravel\Nova\Exceptions\MissingActionHandlerException;
 use Laravel\Nova\Http\Requests\ActionRequest;
 use Laravel\Nova\Nova;
 
-abstract class DetachedAction extends Action
+abstract class DetachedAction extends Action implements PotentiallyMissing
 {
     /**
      * Indicates if this action is only available on the resource index view.
@@ -38,7 +39,8 @@ abstract class DetachedAction extends Action
     /**
      * Execute the action for the given request.
      *
-     * @param  \Laravel\Nova\Http\Requests\ActionRequest  $request
+     * @param \Laravel\Nova\Http\Requests\ActionRequest $request
+     *
      * @return mixed
      * @throws MissingActionHandlerException
      */
@@ -46,7 +48,7 @@ abstract class DetachedAction extends Action
     {
         $method = ActionMethod::determine($this, $request->targetModel());
 
-        if (! method_exists($this, $method)) {
+        if (!method_exists($this, $method)) {
             throw MissingActionHandlerException::make($this, $method);
         }
 
@@ -56,7 +58,7 @@ abstract class DetachedAction extends Action
             $request, $this, $method, collect([]), $fields
         );
 
-        return $this->handleResult($fields, [$results]);
+        return $this->handleResult($fields, [ $results ]);
     }
 
     /**
@@ -70,5 +72,15 @@ abstract class DetachedAction extends Action
             'detachedAction' => true,
             'label' => $this->label(),
         ], parent::jsonSerialize(), $this->meta());
+    }
+
+    /**
+     * Determine if the object should be considered "missing".
+     *
+     * @return bool
+     */
+    public function isMissing()
+    {
+        return (bool) request()->input('isDetachedAction') !== true;
     }
 }

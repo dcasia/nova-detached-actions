@@ -1,6 +1,6 @@
 <?php
 
-namespace Brightspot\Nova\Tools\DetachedActions;
+namespace DigitalCreative\DetachedActions;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
