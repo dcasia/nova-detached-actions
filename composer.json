@@ -4,7 +4,8 @@
     "keywords": [
         "laravel",
         "nova",
-        "detached actions"
+        "detached",
+        "actions"
     ],
     "license": "MIT",
     "require": {

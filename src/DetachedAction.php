@@ -5,10 +5,10 @@ namespace DigitalCreative\DetachedActions;
 use Illuminate\Http\Resources\PotentiallyMissing;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionMethod;
-use Laravel\Nova\Actions\DispatchAction;
 use Laravel\Nova\Exceptions\MissingActionHandlerException;
 use Laravel\Nova\Http\Requests\ActionRequest;
 use Laravel\Nova\Nova;
+use Throwable;
 
 abstract class DetachedAction extends Action implements PotentiallyMissing
 {
@@ -39,10 +39,10 @@ abstract class DetachedAction extends Action implements PotentiallyMissing
     /**
      * Execute the action for the given request.
      *
-     * @param \Laravel\Nova\Http\Requests\ActionRequest $request
+     * @param ActionRequest $request
      *
+     * @throws MissingActionHandlerException|Throwable
      * @return mixed
-     * @throws MissingActionHandlerException
      */
     public function handleRequest(ActionRequest $request)
     {
