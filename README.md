@@ -2,7 +2,7 @@
 
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
 
-:warning: Keep in mind, since the action is detached from the row selection checkboxes in the resource table, you will not have a collection of models to iterate over. Detached actions are intended to be independent of the selction in the table.
+:warning: Keep in mind, since the action is detached from the row selection checkboxes in the resource table, you will not have a collection of models to iterate over. Detached actions are intended to be independent of the selection in the table.
 
 
 ![screenshot](https://i.imgur.com/S8GrNFI.png)
@@ -12,7 +12,7 @@ A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached f
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
 
 ```bash
-composer require gobrightspot/nova-detached-actions
+composer require digital-creative/nova-detached-actions
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ Create a custom Nova Action file:
 php artisan nova:action ExportUsers
 ```
 
-Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `Brightspot\Nova\Tools\DetachedActions\DetachedAction` class.
+Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `DigitalCreative\DetachedActions\DetachedAction` class.
 
 Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
 
@@ -36,7 +36,7 @@ Here's a full example:
 
 namespace App\Nova\Actions;
 
-use Brightspot\Nova\Tools\DetachedActions\DetachedAction;
+use DigitalCreative\DetachedActions\DetachedAction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -125,8 +125,6 @@ You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel]
      }
  ...
  ```
-
-
 
 ## License
 
